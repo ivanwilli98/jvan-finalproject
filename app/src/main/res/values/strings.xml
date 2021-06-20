@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">final-project</string>
+    <string name="signup"><b><u>Sign up</u></b></string>
+    <string name="disini"><b><u>disini</u></b></string>
+    <string name="login"><b><u>Login</u></b></string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string-array name="source">
+        <item>Testing 1</item>
+        <item>Testing 2</item>
+        <item>Testing 3</item>
+    </string-array>
+</resources>
