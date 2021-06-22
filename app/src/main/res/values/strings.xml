@@ -7,8 +7,6 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
     <string-array name="source">
-        <item>Testing 1</item>
-        <item>Testing 2</item>
-        <item>Testing 3</item>
+        <item>Pilih salah satu</item>
     </string-array>
 </resources>
