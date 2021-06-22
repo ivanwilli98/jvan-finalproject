@@ -10,7 +10,7 @@
         app:showAsAction="always|withText" />
     <item
         android:id="@+id/tab_ticket"
-        android:title="Ticket"
+        android:title="Tiketku"
         android:icon="@drawable/ic_baseline_confirmation_number"
         app:showAsAction="always|withText"/>
     <item

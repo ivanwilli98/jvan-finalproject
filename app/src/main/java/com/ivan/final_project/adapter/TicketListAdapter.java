@@ -42,6 +42,7 @@ public class TicketListAdapter extends RecyclerView.Adapter<TicketListAdapter.My
         holder.tFrom.setText(ticketList.get(position).getTripSchedule().getTripDetail().getSourceStop().getName());
         holder.tTo.setText(ticketList.get(position).getTripSchedule().getTripDetail().getDestStop().getName());
         holder.tTripDate.setText(ticketList.get(position).getJourneyDate());
+        holder.tFare.setText("Rp. "+String.valueOf(ticketList.get(position).getTripSchedule().getTripDetail().getFare()));
     }
 
     @Override
@@ -50,7 +51,7 @@ public class TicketListAdapter extends RecyclerView.Adapter<TicketListAdapter.My
     }
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
-        public TextView tNamaBus, tKodeBus, tFrom, tTo, tTripDate;
+        public TextView tNamaBus, tKodeBus, tFrom, tTo, tTripDate, tFare;
         public MyViewHolder(@NonNull @NotNull View itemView) {
             super(itemView);
             tNamaBus = itemView.findViewById(R.id.txtNamaBus);
@@ -58,6 +59,7 @@ public class TicketListAdapter extends RecyclerView.Adapter<TicketListAdapter.My
             tFrom = itemView.findViewById(R.id.txtFrom);
             tTo = itemView.findViewById(R.id.txtTo);
             tTripDate = itemView.findViewById(R.id.txtTripDate);
+            tFare = itemView.findViewById(R.id.txtFare);
         }
     }
 }

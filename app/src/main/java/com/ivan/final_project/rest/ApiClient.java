@@ -1,5 +1,7 @@
 package com.ivan.final_project.rest;
 
+import android.util.Log;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -49,8 +51,10 @@ public class ApiClient {
     public static class AddHeaderInterceptor implements Interceptor {
         @Override
         public Response intercept(Chain chain) throws IOException {
+
             Request.Builder builder = chain.request().newBuilder();
             builder.addHeader("Authorization", "Bearer "+tokens);
+            builder.addHeader("Content-Type", "application/json");
 
             return chain.proceed(builder.build());
         }

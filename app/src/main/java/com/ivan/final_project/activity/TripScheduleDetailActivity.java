@@ -19,6 +19,9 @@ import com.ivan.final_project.rest.ApiClient;
 import com.ivan.final_project.rest.ApiInterface;
 import com.ivan.final_project.util.MySession;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -30,8 +33,9 @@ public class TripScheduleDetailActivity extends AppCompatActivity {
 
     ApiInterface apiInterface;
     private Integer idTripSchedule, passengerId;
+    private String namaUser, alamatEmail, noTelp;
     private String tripDate;
-    private TextView tNamabus, tKodeBus, tFrom, tTo;
+    private TextView tNamaBus, tKodeBus, tFrom, tTo, tTanggalBerangkat, tFare, tKursiSisa, tNamaLengkap, tAlamatEmail, tNoTelp;
     private Button bPesanTiket;
     private MySession session;
 
@@ -40,10 +44,17 @@ public class TripScheduleDetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_trip_schedule_detail);
 
-        tNamabus = findViewById(R.id.txtNamaBus);
+        tNamaBus = findViewById(R.id.txtNamaBus);
         tKodeBus = findViewById(R.id.txtKodeBus);
         tFrom = findViewById(R.id.txtFrom);
         tTo = findViewById(R.id.txtTo);
+        tTanggalBerangkat = findViewById(R.id.txtTripDate);
+        tFare = findViewById(R.id.txtFare);
+        tKursiSisa = findViewById(R.id.txtAvailableSeats);
+        tNamaLengkap = findViewById(R.id.tvNamaLengkap);
+        tAlamatEmail = findViewById(R.id.tvAlamatEmail);
+        tNoTelp = findViewById(R.id.tvNoTelepon);
+
         apiInterface = ApiClient.getClient().create(ApiInterface.class);
         bPesanTiket = findViewById(R.id.btnPesanTiket);
 
@@ -54,6 +65,9 @@ public class TripScheduleDetailActivity extends AppCompatActivity {
             //Get Session
             HashMap<String, String> sUsernya = session.getUserDetails();
             passengerId = Integer.valueOf(sUsernya.get(MySession.KEY_ID));
+            namaUser = sUsernya.get(MySession.KEY_FIRST_NAME)+" "+sUsernya.get(MySession.KEY_LAST_NAME);
+            alamatEmail = sUsernya.get(MySession.KEY_EMAIL);
+            noTelp = sUsernya.get(MySession.KEY_MOBILE_NUMBER);
         }
 
         bPesanTiket.setOnClickListener(new View.OnClickListener() {
@@ -68,7 +82,7 @@ public class TripScheduleDetailActivity extends AppCompatActivity {
                         Log.d("PRINT", "ticket : "+ticket.toString());
                         if (ticket != null){
                             final AlertDialog.Builder builder = new AlertDialog.Builder(TripScheduleDetailActivity.this);
-                            builder.setTitle("information");
+                            builder.setTitle("Berhasil");
                             builder.setMessage("Berhasil pesan ticket");
                             builder.setPositiveButton("Ok",(dialog, which) -> {
                                 Intent home=new Intent(TripScheduleDetailActivity.this, MainActivity.class);
@@ -103,11 +117,27 @@ public class TripScheduleDetailActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<TripSchedule> call, Response<TripSchedule> response) {
                 TripSchedule tripSchedule = response.body();
-                tNamabus.setText(tripSchedule.getTripDetail().getAgency().getDetail());
+
+                SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+                try {
+                    Date newDate = format.parse(String.valueOf(tripSchedule.getTripDate()));
+                    tripDate = tripSchedule.getTripDate();
+                    format = new SimpleDateFormat("dd MMMM yyyy");
+                    String date = format.format(newDate);
+                    tTanggalBerangkat.setText(date);
+                } catch (ParseException e) {
+                    tTanggalBerangkat.setText(tripSchedule.getTripDate());
+                }
+
+                tNamaBus.setText(tripSchedule.getTripDetail().getBus().getAgency().getDetail());
                 tKodeBus.setText(tripSchedule.getTripDetail().getBus().getCode());
                 tFrom.setText(tripSchedule.getTripDetail().getSourceStop().getName());
                 tTo.setText(tripSchedule.getTripDetail().getDestStop().getName());
-                tripDate = tripSchedule.getTripDate();
+                tKursiSisa.setText("Tersisa "+String.valueOf(tripSchedule.getAvailableSeats())+" kursi");
+                tFare.setText("Rp. "+String.valueOf(tripSchedule.getTripDetail().getFare())+"/orang");
+                tNamaLengkap.setText(namaUser);
+                tAlamatEmail.setText(alamatEmail);
+                tNoTelp.setText(noTelp);
             }
 
             @Override

@@ -39,7 +39,7 @@ public class TripScheduleActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_trip_schedule);
 
-        setTitle("Tiket Bus");
+        setTitle("List Tiket");
 
         tInternetHilang = findViewById(R.id.internet_hilang);
         tTripScheduleKosong = findViewById(R.id.trip_schedule_kosong);

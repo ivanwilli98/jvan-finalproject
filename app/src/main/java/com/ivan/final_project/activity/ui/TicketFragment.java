@@ -52,7 +52,7 @@ public class TicketFragment extends Fragment {
     private RecyclerView.LayoutManager mLayoutManagerTicket;
     private String from, to, tripDate, namaBus, kodeBus;
     private Integer passengerId;
-    private TextView tNamabus, tKodeBus, tFrom, tTo, tTripDate;
+    private TextView tNamabus, tKodeBus, tFrom, tTo, tTripDate, tFare;
 
     public TicketFragment() {
         // Required empty public constructor
@@ -96,6 +96,8 @@ public class TicketFragment extends Fragment {
         tKodeBus = fragmentView.findViewById(R.id.txtKodeBus);
         tFrom = fragmentView.findViewById(R.id.txtFrom);
         tTo = fragmentView.findViewById(R.id.txtTo);
+        tTripDate = fragmentView.findViewById(R.id.txtTripDate);
+        tFare = fragmentView.findViewById(R.id.txtFare);
 
         rvListTicket = fragmentView.findViewById(R.id.listTicket);
         mLayoutManagerTicket = new LinearLayoutManager(getActivity());

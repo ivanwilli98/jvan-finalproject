@@ -14,7 +14,18 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Finalproject"
         android:usesCleartextTraffic="true">
-        <activity android:name=".activity.TripScheduleDetailActivity"></activity>
+        <activity
+            android:name=".activity.ComingSoonActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"></activity>
+        <activity
+            android:name=".activity.UbahPasswordActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity
+            android:name=".activity.EditProfileActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity
+            android:name=".activity.TripScheduleDetailActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity android:name=".activity.TripScheduleActivity" />
         <activity
             android:name=".activity.RegisterActivity"

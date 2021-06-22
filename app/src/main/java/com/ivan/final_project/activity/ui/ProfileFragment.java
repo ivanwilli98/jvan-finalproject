@@ -18,8 +18,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ivan.final_project.R;
+import com.ivan.final_project.activity.ComingSoonActivity;
+import com.ivan.final_project.activity.EditProfileActivity;
 import com.ivan.final_project.activity.LoginActivity;
 import com.ivan.final_project.activity.MainActivity;
+import com.ivan.final_project.activity.UbahPasswordActivity;
 import com.ivan.final_project.util.MySession;
 
 import org.jetbrains.annotations.NotNull;
@@ -45,6 +48,7 @@ public class ProfileFragment extends Fragment {
 
     private String firstName, lastName, email;
     private TextView tFirstName, tLastName, tEmail;
+    private TextView tEditProfile, tUbahPassword, tPusatBantuan, tTentangKami;
 
     public ProfileFragment() {
         // Required empty public constructor
@@ -102,6 +106,10 @@ public class ProfileFragment extends Fragment {
         tFirstName = rootview.findViewById(R.id.txtFirstname);
         tLastName = rootview.findViewById(R.id.txtLastname);
         tEmail = rootview.findViewById(R.id.txtEmail);
+        tEditProfile = rootview.findViewById(R.id.tvEditProfile);
+        tUbahPassword = rootview.findViewById(R.id.tvUbahPassword);
+        tPusatBantuan = rootview.findViewById(R.id.tvPusatBantuan);
+        tTentangKami = rootview.findViewById(R.id.tvTentangKami);
 
         tFirstName.setText(firstName+" ");
         tLastName.setText(lastName+" ");
@@ -111,6 +119,38 @@ public class ProfileFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 logout();
+            }
+        });
+
+        tEditProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getActivity(), EditProfileActivity.class);
+                startActivity(i);
+            }
+        });
+
+        tUbahPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getActivity(), UbahPasswordActivity.class);
+                startActivity(i);
+            }
+        });
+
+        tPusatBantuan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getActivity(), ComingSoonActivity.class);
+                startActivity(i);
+            }
+        });
+
+        tTentangKami.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getActivity(), ComingSoonActivity.class);
+                startActivity(i);
             }
         });
 

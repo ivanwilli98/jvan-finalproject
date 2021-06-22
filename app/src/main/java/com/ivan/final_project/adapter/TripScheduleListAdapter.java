@@ -21,6 +21,9 @@ import com.ivan.final_project.models.TripSchedule;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 public class TripScheduleListAdapter extends RecyclerView.Adapter<TripScheduleListAdapter.MyViewHolder> {
@@ -42,12 +45,22 @@ public class TripScheduleListAdapter extends RecyclerView.Adapter<TripScheduleLi
 
     @Override
     public void onBindViewHolder(@NonNull @NotNull TripScheduleListAdapter.MyViewHolder holder, int position) {
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        try {
+            Date newDate = format.parse(String.valueOf(tripScheduleList.get(position).getTripDate()));
+            format = new SimpleDateFormat("dd MMMM yyyy");
+            String date = format.format(newDate);
+            holder.tTanggalBerangkat.setText(date);
+        } catch (ParseException e) {
+            holder.tTanggalBerangkat.setText(tripScheduleList.get(position).getTripDate());
+        }
+
         holder.tNamaBus.setText(tripScheduleList.get(position).getTripDetail().getBus().getAgency().getDetail());
         holder.tKodeBus.setText(tripScheduleList.get(position).getTripDetail().getBus().getCode());
         holder.tFrom.setText(tripScheduleList.get(position).getTripDetail().getSourceStop().getName());
         holder.tTo.setText(tripScheduleList.get(position).getTripDetail().getDestStop().getName());
-        holder.tTanggalBerangkat.setText(tripScheduleList.get(position).getTripDate());
-        holder.tKursiSisa.setText(String.valueOf(tripScheduleList.get(position).getAvailableSeats()));
+        holder.tKursiSisa.setText("Tersisa "+String.valueOf(tripScheduleList.get(position).getAvailableSeats())+" kursi");
+        holder.tFare.setText("Rp. "+String.valueOf(tripScheduleList.get(position).getTripDetail().getFare())+"/orang");
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -66,7 +79,7 @@ public class TripScheduleListAdapter extends RecyclerView.Adapter<TripScheduleLi
     }
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
-        public TextView tNamaBus, tKodeBus, tFrom, tTo, tTanggalBerangkat, tKursiSisa;
+        public TextView tNamaBus, tKodeBus, tFrom, tTo, tTanggalBerangkat, tKursiSisa, tFare;
         public MyViewHolder(@NonNull @NotNull View itemView) {
             super(itemView);
             tNamaBus = itemView.findViewById(R.id.txtNamaBus);
@@ -75,6 +88,7 @@ public class TripScheduleListAdapter extends RecyclerView.Adapter<TripScheduleLi
             tTo = itemView.findViewById(R.id.txtTo);
             tTanggalBerangkat = itemView.findViewById(R.id.txtTripDate);
             tKursiSisa = itemView.findViewById(R.id.txtAvailableSeats);
+            tFare = itemView.findViewById(R.id.txtFare);
         }
     }
 }
