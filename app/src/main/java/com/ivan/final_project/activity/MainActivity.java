@@ -40,6 +40,13 @@ public class MainActivity extends AppCompatActivity {
             return loadFragment(fragment);
         });
         loadFragment(new HomeFragment());
+
+        if(getIntent().getIntExtra("ticketFragment",0) == 1){
+            navView.setSelectedItemId(R.id.tab_ticket);
+            loadFragment(new TicketFragment());
+        } else {
+            loadFragment(new HomeFragment());
+        }
     }
 
     private boolean loadFragment(Fragment fragment){

@@ -87,6 +87,7 @@ public class TripScheduleDetailActivity extends AppCompatActivity {
                             builder.setPositiveButton("Ok",(dialog, which) -> {
                                 Intent home=new Intent(TripScheduleDetailActivity.this, MainActivity.class);
                                 home.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                home.putExtra("ticketFragment",1);
                                 startActivity(home);
                                 finish();
                             });

@@ -15,6 +15,10 @@ import com.ivan.final_project.models.Ticket;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 public class TicketListAdapter extends RecyclerView.Adapter<TicketListAdapter.MyViewHolder>{
@@ -36,12 +40,31 @@ public class TicketListAdapter extends RecyclerView.Adapter<TicketListAdapter.My
 
     @Override
     public void onBindViewHolder(@NonNull @NotNull TicketListAdapter.MyViewHolder holder, int position) {
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+
+        try {
+            Date today = Calendar.getInstance().getTime(); // get tanggal hari ini
+            Date newDate = format.parse(String.valueOf(ticketList.get(position).getJourneyDate()));
+            if(today.after(newDate)) {
+                holder.itemView.setVisibility(View.GONE);
+                ViewGroup.LayoutParams params = holder.itemView.getLayoutParams();
+                params.height = 0;
+                holder.itemView.setLayoutParams(params);
+            } else {
+                format = new SimpleDateFormat("dd MMMM yyyy");
+                String date = format.format(newDate);
+                holder.tTripDate.setText(date);
+            }
+
+        } catch (ParseException e) {
+            holder.tTripDate.setText(ticketList.get(position).getJourneyDate());
+        }
+
         Log.d("PRINT", "ticketList : "+ticketList.toString());
         holder.tNamaBus.setText(ticketList.get(position).getTripSchedule().getTripDetail().getAgency().getDetail());
         holder.tKodeBus.setText(ticketList.get(position).getTripSchedule().getTripDetail().getBus().getCode());
         holder.tFrom.setText(ticketList.get(position).getTripSchedule().getTripDetail().getSourceStop().getName());
         holder.tTo.setText(ticketList.get(position).getTripSchedule().getTripDetail().getDestStop().getName());
-        holder.tTripDate.setText(ticketList.get(position).getJourneyDate());
         holder.tFare.setText("Rp. "+String.valueOf(ticketList.get(position).getTripSchedule().getTripDetail().getFare()));
     }
 

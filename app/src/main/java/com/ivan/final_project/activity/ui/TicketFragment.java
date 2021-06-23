@@ -5,6 +5,7 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -53,6 +54,7 @@ public class TicketFragment extends Fragment {
     private String from, to, tripDate, namaBus, kodeBus;
     private Integer passengerId;
     private TextView tNamabus, tKodeBus, tFrom, tTo, tTripDate, tFare;
+    SwipeRefreshLayout swipeRefreshLayout;
 
     public TicketFragment() {
         // Required empty public constructor
@@ -106,6 +108,15 @@ public class TicketFragment extends Fragment {
 
         tInternetHilang = fragmentView.findViewById(R.id.internet_hilang);
         tTicketKosong = fragmentView.findViewById(R.id.ticket_kosong);
+
+        swipeRefreshLayout = fragmentView.findViewById(R.id.swipeRefresh);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                refresh();
+                swipeRefreshLayout.setRefreshing(false);
+            }
+        });
 
         refresh();
         return fragmentView;

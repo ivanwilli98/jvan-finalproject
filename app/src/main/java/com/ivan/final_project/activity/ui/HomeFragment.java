@@ -21,10 +21,12 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.ivan.final_project.R;
+import com.ivan.final_project.activity.ComingSoonActivity;
 import com.ivan.final_project.activity.TripScheduleActivity;
 import com.ivan.final_project.models.Stop;
 import com.ivan.final_project.models.TripSchedule;
@@ -77,6 +79,8 @@ public class HomeFragment extends Fragment {
     private Integer ToHolder;
     private String StartDateHolder, EndDateHolder;
     private Boolean CheckEditText;
+    private View vPengumuman;
+    private LinearLayout linearLayoutPromoSaatIni, linearLayoutTesCovid;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -122,6 +126,9 @@ public class HomeFragment extends Fragment {
         spFrom = fragmentView.findViewById(R.id.spFrom);
         spTo = fragmentView.findViewById(R.id.spTo);
         bSubmit = fragmentView.findViewById(R.id.btnSubmit);
+        vPengumuman = fragmentView.findViewById(R.id.viewPengumuman);
+        linearLayoutPromoSaatIni = fragmentView.findViewById(R.id.llPromoSaatIni);
+        linearLayoutTesCovid = fragmentView.findViewById(R.id.llTestCovid);
 
         date = (view, year, monthOfYear, dayOfMonth) -> {
             myCalendar.set(Calendar.YEAR, year);
@@ -141,6 +148,30 @@ public class HomeFragment extends Fragment {
         });
 
         bSubmit.setOnClickListener(view -> cekSubmit());
+
+        vPengumuman.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getActivity(), ComingSoonActivity.class);
+                startActivity(i);
+            }
+        });
+
+        linearLayoutPromoSaatIni.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getActivity(), ComingSoonActivity.class);
+                startActivity(i);
+            }
+        });
+
+        linearLayoutTesCovid.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getActivity(), ComingSoonActivity.class);
+                startActivity(i);
+            }
+        });
 
         getStop();
 
