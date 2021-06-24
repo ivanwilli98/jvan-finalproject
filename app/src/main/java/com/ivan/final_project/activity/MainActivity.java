@@ -44,7 +44,12 @@ public class MainActivity extends AppCompatActivity {
         if(getIntent().getIntExtra("ticketFragment",0) == 1){
             navView.setSelectedItemId(R.id.tab_ticket);
             loadFragment(new TicketFragment());
-        } else {
+        }
+        else if (getIntent().getIntExtra("profileFragment",0) == 1) {
+            navView.setSelectedItemId(R.id.tab_profile);
+            loadFragment(new ProfileFragment());
+        }
+        else {
             loadFragment(new HomeFragment());
         }
     }

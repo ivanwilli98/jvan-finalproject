@@ -158,7 +158,7 @@ public class LoginActivity extends AppCompatActivity {
                                 startActivity(i);
 
                                 //Toast Activity
-                                Toast.makeText(LoginActivity.this, "Berhasil Login !!\nAnda Login Sebagai user", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(LoginActivity.this, "Berhasil Login !!", Toast.LENGTH_SHORT).show();
 
                                 //Destroy Login
                                 finish();

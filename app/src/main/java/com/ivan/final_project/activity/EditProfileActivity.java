@@ -96,9 +96,12 @@ public class EditProfileActivity extends AppCompatActivity {
                             if(newUserUpdate != null) {
                                 updateSession();
                                 final AlertDialog.Builder builder = new AlertDialog.Builder(EditProfileActivity.this);
-                                builder.setTitle("information");
+                                builder.setTitle("Berhasil");
                                 builder.setMessage("Update Profile Berhasil Dilakukan");
                                 builder.setPositiveButton("Ok",(dialog, which) -> {
+                                    Intent home=new Intent(EditProfileActivity.this, MainActivity.class);
+                                    home.putExtra("profileFragment",1);
+                                    startActivity(home);
                                     finish();
                                 });
                                 builder.setCancelable(false);
